@@ -2,6 +2,16 @@ kind: pipeline
 name: test slack
 
 steps:
+- name: publish  
+  image: plugins/ecr
+  settings:
+    access_key:
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    repo: bar
+    registry: 171585036073.dkr.ecr.us-east-1.amazonaws.com
+ 
 - name: notify
   image: plugins/slack
   settings:
