@@ -2,27 +2,8 @@ kind: pipeline
 name: test slack
 
 steps:
-- name: publish  
-  image: plugins/ecr
-  settings:
-    access_key:
-      from_secret: aws_access_key_id
-    secret_key:
-      from_secret: aws_secret_access_key
-    repo: bar
-    registry: 171585036073.dkr.ecr.us-east-1.amazonaws.com
-    region: us-east-1
-    tags:
-     - latest
- 
-- name: notify
-  image: plugins/slack
-  settings:
-    webhook: https://hooks.slack.com/services/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
-    channel: dev
-    template: >
-      {{#success build.status}}
-        build {{build.number}} succeeded. Good job.
-      {{else}}
-        build {{build.number}} failed. Fix me please.
-      {{/success}}
+- name: docker build & run
+  image: node:14
+  commands:
+    docker build -t test .
+    docker run -d -p 80:3000 test
