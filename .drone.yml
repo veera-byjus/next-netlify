@@ -6,7 +6,8 @@ steps:
   image: node
   commands:
   - npm install
-  - npm test
+  - npm run build
+  - npm start
 
 - name: notify
   image: plugins/slack
