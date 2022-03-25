@@ -1,12 +1,7 @@
 kind: pipeline
-name: default
+name: test slack
 
 steps:
-- name: test
-  image: node
-  commands:
-  - npm install
-  - npm test
 
 - name: notify
   image: plugins/slack
