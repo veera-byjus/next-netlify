@@ -11,6 +11,9 @@ steps:
       from_secret: aws_secret_access_key
     repo: bar
     registry: 171585036073.dkr.ecr.us-east-1.amazonaws.com
+    region: us-east-1
+    tags:
+     - latest
  
 - name: notify
   image: plugins/slack
