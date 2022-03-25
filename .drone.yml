@@ -1,0 +1,18 @@
+kind: pipeline
+type: aws
+name: default
+
+pool:
+  use: ubuntu
+
+steps:
+- name: backend
+  image: node:14.19-alpine
+  commands:
+  - npm i
+  - npm run build
+
+- name: notify
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
