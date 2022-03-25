@@ -1,16 +1,12 @@
 kind: pipeline
-type: aws
 name: default
 
-pool:
-  use: ubuntu
-
 steps:
-- name: backend
-  image: node:14.19-alpine
+- name: test
+  image: node
   commands:
-  - npm i
-  - npm run build
+  - npm install
+  - npm test
 
 - name: notify
   image: plugins/slack
