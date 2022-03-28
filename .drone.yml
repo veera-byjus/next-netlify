@@ -1,11 +1,26 @@
 kind: pipeline
-name: test slack
+type: kubernetes
+name: default
 
 steps:
-steps:
-- name: test
+
+- name: build
   image: node:14
   commands:
-  - npm install
-  - npm run build
-  - npm start
+    - "npm build"
+
+- name: publish  
+  image: plugins/ecr
+  settings:
+    access_key: 
+      from_secret: aws_access_key
+    secret_key: 
+      from_secret: aws_secret_key
+    repo: 
+      from_secret: aws_ecr_repo
+    registry: 
+      from_secret: aws_ecr_registry
+    region:
+      from_secret: aws_region
+    tags:
+        - 'latest'
